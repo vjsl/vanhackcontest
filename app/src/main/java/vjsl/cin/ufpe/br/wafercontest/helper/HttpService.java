@@ -17,8 +17,8 @@ import vjsl.cin.ufpe.br.wafercontest.model.Country;
 
 public class HttpService extends AsyncTask<Void, Void, Country[]>{
 
-    /*This class implements a function to get Json from server in a separated thread
-     *After convert received Json to Java Class
+    /* This class implements a function to get Json from server in a separated thread
+     * After convert received Json to Java Class
      */
 
     @Override

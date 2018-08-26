@@ -24,6 +24,7 @@ import vjsl.cin.ufpe.br.wafercontest.helper.HttpService;
 import vjsl.cin.ufpe.br.wafercontest.helper.RecyclerCountryTouchHelper;
 import vjsl.cin.ufpe.br.wafercontest.helper.RecyclerItemTouchHelperListener;
 import vjsl.cin.ufpe.br.wafercontest.helper.SwipeHelper;
+import vjsl.cin.ufpe.br.wafercontest.helper.UnderlayButton;
 import vjsl.cin.ufpe.br.wafercontest.model.Country;
 
 public class MainActivity extends AppCompatActivity implements RecyclerItemTouchHelperListener {
@@ -54,15 +55,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         recyclerView.setAdapter(adapter);
 
         //Uncomment the next 2 lines and comment SwipeHelper lines to turn only swipe action active.
+
         //ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerCountryTouchHelper(0, ItemTouchHelper.LEFT, this, adapter);
         //new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
 /**/
         final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_delete);
+
         SwipeHelper swipeHelper = new SwipeHelper(this, recyclerView, adapter) {
             @Override
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
-                underlayButtons.add(new SwipeHelper.UnderlayButton(bitmap,
+                underlayButtons.add(new UnderlayButton(bitmap,
                         "Delete",
                         0,
                         Color.parseColor("#854cc6"),
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
             }
         };
+
 
     }
 

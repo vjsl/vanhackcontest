@@ -207,66 +207,6 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
 
     public abstract void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons);
 
-    public static class UnderlayButton {
-        private String text;
-        private int imageResId;
-        private int color;
-        private int pos;
-        private RectF clickRegion;
-        private UnderlayButtonClickListener clickListener;
-        private Bitmap drawable;
-
-        public UnderlayButton(Bitmap drawable, String text, int imageResId, int color, UnderlayButtonClickListener clickListener) {
-            this.drawable = drawable;
-            this.text = text;
-            this.imageResId = imageResId;
-            this.color = color;
-            this.clickListener = clickListener;
-        }
-
-        public boolean onClick(float x, float y){
-            if (clickRegion != null && clickRegion.contains(x, y)){
-                clickListener.onClick(pos);
-                return true;
-            }
-
-            return false;
-        }
-
-        public void onDraw(Canvas c, RectF rect, int pos){
-            Paint p = new Paint();
-
-            // Draw background
-
-            p.setColor(color);
-
-            c.drawRect(rect, p);
-
-
-
-
-
-            // Draw Text
-            p.setColor(Color.WHITE);
-            p.setTextSize(40);
-            //p.setTextSize(LayoutHelper.getPx(MyApplication.getAppContext(), 12));
-
-            Rect r = new Rect();
-            float cHeight = rect.height();
-            float cWidth = rect.width();
-            p.setTextAlign(Paint.Align.LEFT);
-            //p.getTextBounds(text, 0, text.length(), r);
-            float x = cWidth / 2f - r.width() / 2f - r.left;
-            float y = cHeight / 2f + r.height() / 2f - r.bottom;
-            //c.drawText(text, rect.left + x, rect.top + y, p);
-            c.drawBitmap(drawable, null, rect, p);
-
-
-            clickRegion = rect;
-            this.pos = pos;
-        }
-    }
-
     public interface UnderlayButtonClickListener {
         void onClick(int pos);
     }
