@@ -1,4 +1,4 @@
-# Contest code for Waffer Opportunity on VanHack
+# Contest code for Wafer Opportunity on VanHack
 
 - Getting the data in the provided API
 - Using RecyclerView instead of ListView
