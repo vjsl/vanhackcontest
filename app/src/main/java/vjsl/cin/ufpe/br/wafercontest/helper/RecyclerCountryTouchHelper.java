@@ -9,15 +9,19 @@ import android.view.View;
 
 import java.util.Timer;
 
+import vjsl.cin.ufpe.br.wafercontest.adapter.CountryListAdapter;
 import vjsl.cin.ufpe.br.wafercontest.adapter.CountryViewHolder;
 
 public class RecyclerCountryTouchHelper extends ItemTouchHelper.SimpleCallback {
 
+    private CountryListAdapter adapter;
+
     private RecyclerItemTouchHelperListener listener;
 
-    public RecyclerCountryTouchHelper(int dragDirs, int swipeDirs, RecyclerItemTouchHelperListener listener) {
+    public RecyclerCountryTouchHelper(int dragDirs, int swipeDirs, RecyclerItemTouchHelperListener listener, CountryListAdapter adapter) {
         super(dragDirs, swipeDirs);
         this.listener = listener;
+        this.adapter = adapter;
     }
 
     @Override
@@ -40,9 +44,8 @@ public class RecyclerCountryTouchHelper extends ItemTouchHelper.SimpleCallback {
     }
 
     @Override
-    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+    public void onChildDraw(@NonNull Canvas c, @NonNull final RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         final View foregroundView = ((CountryViewHolder) viewHolder).vForeground;
-        System.out.println(dX);
         getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
     }
 

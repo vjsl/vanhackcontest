@@ -1,6 +1,10 @@
 package vjsl.cin.ufpe.br.wafercontest;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Picture;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -49,17 +53,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerCountryTouchHelper(0, ItemTouchHelper.LEFT, this);
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+        //Uncomment the next 2 lines and comment SwipeHelper lines to turn only swipe action active.
+        //ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerCountryTouchHelper(0, ItemTouchHelper.LEFT, this, adapter);
+        //new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
-/*
+/**/
+        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_delete);
         SwipeHelper swipeHelper = new SwipeHelper(this, recyclerView, adapter) {
             @Override
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
-                underlayButtons.add(new SwipeHelper.UnderlayButton(
+                underlayButtons.add(new SwipeHelper.UnderlayButton(bitmap,
                         "Delete",
                         0,
-                        Color.parseColor("#FF3C30"),
+                        Color.parseColor("#854cc6"),
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(int pos) {
@@ -72,17 +78,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
             }
         };
-        */
 
     }
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int adapterPosition) {
         if(viewHolder instanceof CountryViewHolder){
-            String name = countryList.get(viewHolder.getAdapterPosition()).getName();
-
-            final Country deletedCountry = countryList.get(viewHolder.getAdapterPosition());
-            final int deletedIndex = viewHolder.getAdapterPosition();
             adapter.removeCountry(viewHolder.getAdapterPosition());
         }
     }
